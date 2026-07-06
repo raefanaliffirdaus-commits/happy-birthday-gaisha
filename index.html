@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Birthday Gaisha 🎂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- INTRO SCREEN -->
+  <div class="intro-screen" id="introScreen">
+    <div class="intro-content">
+      <div class="intro-title">🎂 SELAMAT DATANG GAISHA 🎂</div>
+      <div class="intro-sub">✨ Ada kejutan kecil untukmu ✨</div>
+      <button class="start-btn" id="startBtn">🎁 Buka Kejutannya 🎁</button>
+    </div>
+    <!-- Curtain panels — kebuka ke kiri & kanan saat tombol diklik -->
+    <div class="curtain-panel curtain-left" id="curtainLeft"></div>
+    <div class="curtain-panel curtain-right" id="curtainRight"></div>
+    <!-- Sparkle burst dari titik tombol -->
+    <div class="sparkle-burst" id="sparkleBurst"></div>
+  </div>
+
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Ripple rings (ambient) -->
+  <div class="rings-bg" id="ringsBg"></div>
+
+  <!-- Confetti -->
+  <div class="confetti-container" id="confettiContainer"></div>
+
+  <!-- Fireworks -->
+  <canvas class="fireworks-canvas" id="fireworksCanvas"></canvas>
+
+  <!-- MAIN -->
+  <div class="main-wrapper hidden" id="mainWrapper">
+
+    <!-- ── HERO ── -->
+    <header class="hero">
+      <p class="hero-eyebrow">07 · 07 · 2026</p>
+      <h1 class="hero-title">Selamat Ulang Tahun,<br><em>Gaisha Yusya Dwitha</em></h1>
+      <p class="hero-sub">17 tahun — semoga selalu jadi versi terbaik dirimu.</p>
+    </header>
+
+    <!-- ── CAKE SECTION ── -->
+    <section class="cake-section" id="cakeSection">
+      <div class="cake-wrapper" id="cakeWrapper">
+
+        <!-- Cake SVG — single-tier elegant, colorful, dengan lilin menyatu di dalam SVG -->
+        <div class="cake-art" id="cakeArt">
+          <svg viewBox="0 -40 240 220" xmlns="http://www.w3.org/2000/svg" class="cake-svg">
+            <!-- Bottom tier body -->
+            <rect x="20" y="96" width="200" height="65" rx="6" fill="#ff8fb3"/>
+            <!-- Bottom tier top ellipse -->
+            <ellipse cx="120" cy="96" rx="100" ry="18" fill="#ffb3cc"/>
+            <!-- Bottom tier base ellipse -->
+            <ellipse cx="120" cy="161" rx="100" ry="18" fill="#e8628f"/>
+            <!-- Frosting drips bottom -->
+            <path d="M20 96 Q35 81 50 96 Q65 81 80 96 Q95 81 110 96 Q125 81 140 96 Q155 81 170 96 Q185 81 200 96 Q215 81 220 96" fill="none" stroke="#ffd66b" stroke-width="5" stroke-linecap="round"/>
+            <!-- Mid tier body -->
+            <rect x="52" y="52" width="136" height="55" rx="6" fill="#ffd66b"/>
+            <!-- Mid tier top ellipse -->
+            <ellipse cx="120" cy="52" rx="68" ry="13" fill="#ffe28f"/>
+            <!-- Mid tier base ellipse -->
+            <ellipse cx="120" cy="107" rx="68" ry="13" fill="#f0b93f"/>
+            <!-- Frosting drips mid -->
+            <path d="M52 52 Q65 40 78 52 Q91 40 104 52 Q117 40 130 52 Q143 40 156 52 Q169 40 182 52 Q188 40 188 52" fill="none" stroke="#7dd8c4" stroke-width="4" stroke-linecap="round"/>
+            <!-- Decorations bottom tier -->
+            <circle cx="70" cy="129" r="4" fill="#7dd8c4" opacity="0.95"/>
+            <circle cx="100" cy="134" r="5" fill="#a78bfa" opacity="0.9"/>
+            <circle cx="130" cy="129" r="4" fill="#7dd8c4" opacity="0.95"/>
+            <circle cx="158" cy="133" r="5" fill="#ff8fb3" opacity="0.9"/>
+            <!-- Stars on mid tier -->
+            <text x="80" y="82" font-size="10" fill="#ffffff" text-anchor="middle">✦</text>
+            <text x="120" y="78" font-size="8" fill="#fff6d9" text-anchor="middle">✦</text>
+            <text x="160" y="82" font-size="10" fill="#ffffff" text-anchor="middle">✦</text>
+            <!-- 17 text on cake -->
+            <text x="120" y="146" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="Georgia, serif" opacity="0.85">17</text>
+
+            <!-- ── CANDLE (menyatu di dalam SVG, otomatis center di atas tier atas) ── -->
+            <g id="svgCandleGroup">
+              <!-- Candle base (menempel di permukaan atas tier kuning, cy=52 ry=13 → puncak di y=39) -->
+              <rect x="108" y="33" width="24" height="8" rx="3" fill="#5b4636"/>
+              <!-- Candle body -->
+              <rect x="112" y="3" width="16" height="32" rx="3" fill="#a78bfa"/>
+              <rect x="115" y="3" width="5" height="32" fill="#c4b5fd" opacity="0.7"/>
+              <!-- Flame -->
+              <g id="svgFlameGroup">
+                <ellipse cx="120" cy="-8" rx="11" ry="16" fill="#ffb347" opacity="0.4"/>
+                <path id="svgFlame" d="M120 -18 C126 -10 126 -1 120 5 C114 -1 114 -10 120 -18 Z" fill="url(#flameGradient)"/>
+              </g>
+              <defs>
+                <linearGradient id="flameGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="35%" stop-color="#ffe28f"/>
+                  <stop offset="70%" stop-color="#ff8f4d"/>
+                  <stop offset="100%" stop-color="#e8628f" stop-opacity="0.4"/>
+                </linearGradient>
+              </defs>
+            </g>
+
+            <!-- Smoke (muncul setelah lilin ditiup) -->
+            <g id="svgSmokeGroup" style="display:none; opacity:0">
+              <circle class="svg-smoke svg-smoke-1" cx="120" cy="-20" r="3" fill="#e5e7eb" opacity="0.5"/>
+              <circle class="svg-smoke svg-smoke-2" cx="117" cy="-24" r="4" fill="#e5e7eb" opacity="0.4"/>
+              <circle class="svg-smoke svg-smoke-3" cx="123" cy="-29" r="5" fill="#e5e7eb" opacity="0.3"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Plate -->
+        <div class="plate"><div class="plate-shine"></div></div>
+      </div>
+    </section>
+
+    <!-- ── MIC STATUS ── -->
+    <div class="mic-status" id="micStatus">
+      <div class="mic-icon" id="micIcon">🕯️</div>
+      <p id="micText">Buat harapan, lalu tiup lilinnya</p>
+      <div class="blow-meter-wrap" id="blowMeterWrap" style="display:none">
+        <div class="blow-meter-bg">
+          <div class="blow-meter-fill" id="blowMeterFill"></div>
+        </div>
+        <span id="blowMeterLabel">Tiup sekuat mungkin...</span>
+      </div>
+    </div>
+
+    <!-- ── BIRTHDAY MESSAGE (shown after blow) ── -->
+    <div class="birthday-message" id="birthdayMessage">
+      <p class="message-quote">"Setiap memori yang kita buat adalah bagian dari siapa kita sekarang."</p>
+      <p class="message-main">Selamat ulang tahun ke-17, Gaisha.<br>Semoga hari ini seindah dirimu.</p>
+    </div>
+
+
+
+    <!-- ── PRECIOUS MEMORIES BUTTON (muncul setelah lilin ditiup) ── -->
+    <section class="precious-section" id="preciousSection">
+      <a href="precious.html" class="precious-btn" id="preciousBtn">precious memories for me</a>
+    </section>
+
+  </div><!-- end main-wrapper -->
+
+
+
+  <!-- Music -->
+  <div class="music-controls" id="musicControls">
+    <button class="music-btn" id="musicBtn" title="Play/Pause">
+      <span id="musicIcon">▶</span>
+    </button>
+    <span class="music-label">Monokrom — Tulus</span>
+  </div>
+
+  <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
